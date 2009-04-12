@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 config.plugins.typable_id.set_default(:typable_keys, %w[ a  i  u  e  o
                                                         ka ki ku ke ko
                                                         ga gi gu ge go
