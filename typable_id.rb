@@ -18,7 +18,7 @@ config.plugins.typable_id.set_default(:typable_keys, %w[ a  i  u  e  o
 module Termtter::Client
   public_storage[:typable_id] = []
   config.plugins.typable_id.typable_keys.each {|key|
-    public_storage[:typable_id].push([key,'',''])
+    public_storage[:typable_id].push([key, '', ''])
   }
 
   register_hook(
@@ -50,6 +50,14 @@ module Termtter::Client
       return current_id[2]
     else
       return nil
+    end
+  end
+
+  def self.typable_id?(id)
+    if public_storage[:typable_id].assoc(id.to_s)
+      return true
+    else
+      return false
     end
   end
 end
