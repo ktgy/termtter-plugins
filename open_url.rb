@@ -23,7 +23,7 @@ module Termtter::Client
     :help      => ['open_url (TYPABLE|ID|@USER)', 'Open url'],
     :exec_proc => lambda {|arg|
       Thread.new(arg) do |arg|
-        if status = typable_id_status(arg)
+        if public_storage[:typable_id] && status = typable_id_status(arg)
           status.text.gsub(URI.regexp) {|uri|
             open_uri(uri)
           }
@@ -35,13 +35,13 @@ module Termtter::Client
             return if statuses.empty?
             statuses[0].text.gsub(URI.regexp) {|uri| open_uri(uri) }
           when /^\d+/
-            Twitter::API.twitter.show(arg).text.gsub(URI.regexp) {|uri| open_uri(uri) }
+            Termtter::API.twitter.show(arg).text.gsub(URI.regexp) {|uri| open_uri(uri) }
           end
         end
       end
     },
     :completion_proc => lambda {|cmd, arg|
-      if typable_id?(arg)
+      if public_storage[:typable_id] && typable_id?(arg)
         "#{cmd} #{typable_id_convert(arg)}"
       else
         case arg
