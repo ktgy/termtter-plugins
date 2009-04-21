@@ -12,7 +12,7 @@ module Termtter::Client
   register_command(
     :name      => :retweet,
     :aliases   => [:rt],
-    :help      => ['retweet,rt (TYPABLE|ID|@USER)', 'Retweet'],
+    :help      => ['retweet,rt (TYPABLE|ID|@USER)', 'Post a retweet message'],
     :exec_proc => lambda {|arg|
       if public_storage[:typable_id] && s = typable_id_status(arg)
         post_retweet(s)
