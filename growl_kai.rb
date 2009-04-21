@@ -35,13 +35,6 @@ def get_icon_path(s)
                                  $+,
                                  File.extname(s.user.profile_image_url)  ]
   unless File.exist?(cache_file)
-    #unless File.exist?("#{config.plugins.growl.icon_cache_dir}/default.png")
-    #  File.open("#{config.plugins.growl.icon_cache_dir}/default.png", "wb") do |f|
-    #    Termtter::API.connection.start('static.twitter.com', 80) do |http|
-    #      f << http.get('/images/default_profile_normal.png').body
-    #    end
-    #  end
-    #end
     Thread.new(s,cache_file) do |s,cache_file|
       Dir.glob("#{config.plugins.growl.icon_cache_dir}/#{s.user.screen_name}-*") {|f| File.delete(f) }
       url = URI.parse(URI.escape(s.user.profile_image_url))
@@ -105,10 +98,6 @@ Termtter::Client.register_hook(
         <img src="#{get_icon_path(s)}" height="48" width="48" style="float:left; margin:0 5px 5px 0;">
         #{CGI.unescape(s.text)}<br style="clear: both;">
         EOS
-        #growl_text = <<-"EOS"
-        #<img src="#{s.user.profile_image_url}" height="48" width="48" style="float:left; margin:0 5px 5px 0;">
-        ##{CGI.unescape(s.text)}<br style="clear: both;">
-        #EOS
         if image = get_image(s)
           growl_text += %[<hr><img src="#{image}">]
         end
