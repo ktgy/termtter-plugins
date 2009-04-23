@@ -68,7 +68,7 @@ def get_image(s)
       return "http://img.f.hatena.ne.jp/images/fotolife/#{$2}/#{$1}/#{$4}/#{$3}_120.jpg"
     when /^http:\/\/twitpic.com\/(\w+)/
       return "http://twitpic.com/show/thumb/#{$1}"
-    when /^http:\/\/www\.youtube\.com\/watch\?.*v=(\w+)/
+    when /^http:\/\/www\.youtube\.com\/watch\?.*v=([\w-]+)/
       return "http://img.youtube.com/vi/#{$1}/#{rand(3) + 1}.jpg"
     when /^http:\/\/www\.nicovideo\.jp\/watch\/((?:sm|nm|ca)\d+)/
       nico_id = $1
