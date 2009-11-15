@@ -66,7 +66,7 @@ module Termtter
   class CommandLine
     include Singleton
 
-    STTY_ORIGIN = `stty -g`
+    STTY_ORIGIN = `stty -g`.chomp
 
     def start_input_thread
       setup_readline()
